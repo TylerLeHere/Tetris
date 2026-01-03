@@ -132,6 +132,7 @@ T = [['.....',
       '..0..',
       '.....']]
 
+#List that holds all the shapes
 shapes = [S, Z, I, O, J, L, T]
 shape_colors = [(0, 255, 0), (255, 0, 0), (0, 255, 255), (255, 255, 0), (255, 165, 0), (0, 0, 255), (128, 0, 128)]
 
@@ -140,11 +141,16 @@ shape_colors = [(0, 255, 0), (255, 0, 0), (0, 255, 255), (255, 255, 0), (255, 16
 
 
 class Piece(object):
-    pass
+    def __init__(self, x, y, shape):
+        self.x = x
+        self.y = y
+        self.shape = shape
+        self.color = shape_colors[shapes.index(shape)]
+        self.rotation = 0
 
 
 def create_grid(locked_positions={}):
-    pass
+    grid = [[(0,0,0) for x in range(10)] for x in range(20)]
 
 
 def convert_shape_format(shape):
