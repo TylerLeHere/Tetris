@@ -1,3 +1,5 @@
+from dataclasses import asdict
+
 import pygame
 import random
 
@@ -9,6 +11,7 @@ import random
 # - draw_window
 # - rotating shape in main
 # - setting up the main
+
 
 """
 10 x 20 square grid
@@ -150,7 +153,21 @@ class Piece(object):
 
 
 def create_grid(locked_positions={}):
-    grid = [[(0,0,0) for x in range(10)] for x in range(20)]
+    #Create one list for every row in our list
+
+    grid = [[(0,0,0) for _ in range(10)] for _ in range(20)]
+
+    #Locked Position, what if fallen static blocks, we need to draw those, check if any
+    #positions in locked position, get the color and change the color
+    for i in range (len(grid)):
+        for j in range (len(grid[i])):
+            if (j, i) in locked_positions:
+                #looking through the grid, find the corresponding position to lock position
+                c = locked_positions[(j, i)]
+                grid[i][j] = c
+
+    return grid
+
 
 
 def convert_shape_format(shape):
