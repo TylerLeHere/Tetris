@@ -3,6 +3,8 @@ from dataclasses import asdict
 import pygame
 import random
 
+from pygame.examples import grid
+
 # creating the data structure for pieces
 # setting up global vars
 # functions
@@ -183,16 +185,32 @@ def check_lost(positions):
 
 
 def get_shape():
-    pass
+    return random.choice(shapes) #Pick a random shape falling through the screen
 
 
 def draw_text_middle(text, size, color, surface):
     pass
 
 
-def draw_grid(surface, row, col):
-    pass
+def draw_grid(surface, gird):
+    # Changing the surface with color
+    surface.fill((0,0,0))
 
+    pygame.font.init()
+    font = pygame.font.SysFont('comicsans', 60)
+    label = font.render('Tetris', 1, (255,255,255))
+
+    #Draw the label on the screen
+    surface.blit(label, (top_left_x + play_width/2 - label.get_width()/2, top_left_y))
+
+    for i in range(len(grid)):
+        for j in range(len(grid[i])):
+            pygame.draw.rect(surface, grid[i][j], (top_left_x + j* 30, top_left_y + i * 30, 30, 30), 0)
+
+    # draw grid and border
+    draw_grid(surface, 20, 10)
+    pygame.draw.rect(surface, (255, 0, 0), (top_left_x, top_left_y, play_width, play_height), 4)
+    pygame.display.update()
 
 def clear_rows(grid, locked):
     pass
